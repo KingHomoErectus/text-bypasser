@@ -36,7 +36,7 @@
             display: flex;
             align-items: center;
             position: fixed;
-            top: 0; /* Fixed at the top */
+            top: 0; 
             left: 0;
         }
 
@@ -105,7 +105,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: 100px; /* Spacing adjusted */
+            margin-top: 100px;
         }
 
         h1.main-title {
@@ -203,7 +203,7 @@
 
         .toggle-bar input {
             margin-left: 15px;
-            pointer-events: none; /* Prevent clicking directly on the checkbox */
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -307,12 +307,12 @@
             let result = '';
 
             for (let char of inputText) {
-                let convertedChar = charMap[char] || char; // Use mapped character or the original if no mapping exists
+                let convertedChar = charMap[char] || char; 
                 result += addInvisibleChar ? convertedChar + '\u2065' : convertedChar;
             }
 
             outputBox.textContent = result.trim();
-            outputBox.appendChild(copyButton); // Ensure the copy button stays visible inside the output box
+            outputBox.appendChild(copyButton); 
         }
 
         function copyToClipboard() {
