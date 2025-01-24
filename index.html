@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bypasser - Homo Erectus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #0e0e0e;
+            color: #cfcfff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(circle at left bottom, rgba(122, 59, 255, 0.3), transparent 70%);
+            z-index: -1;
+        }
+
+        .banner {
+            width: 100%;
+            background-color: #2c2c3e;
+            padding: 15px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0; /* Fixed at the top */
+            left: 0;
+        }
+
+        .banner h1 {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(to right, white, #5c0bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        .banner h2 {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(to right, white, #ff0b0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+        }
+
+        .info-button {
+            margin-left: 20px;
+            position: relative;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .info-button:hover .tooltip {
+            display: block;
+        }
+
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: -12px;
+            right: -800px;
+            background-color: #2c2c3e;
+            color: #cfcfff;
+            border: 1px solid #7a3bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            background-color: #2c2c3e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 100px; /* Spacing adjusted */
+        }
+
+        h1.main-title {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(to right, white, #5c0bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            display: block;
+            background-color: #1e1e2f;
+            color: #cfcfff;
+            border: 2px solid #7a3bff;
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 15px;
+            resize: none;
+        }
+
+        #outputBox {
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            display: block;
+            background-color: #1e1e2f;
+            color: #cfcfff;
+            border: 2px solid #7a3bff;
+            border-radius: 3px;
+            padding: 10px;
+            min-height: 100px;
+            position: relative;
+            white-space: pre-wrap;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #7a3bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #9a5fff;
+            transform: scale(1.1);
+        }
+
+        #copyButton {
+            position: absolute;
+            bottom: -10px;
+            right: 5px;
+            background-color: #7a3bff;
+            border: none;
+            border-radius: 50px;
+            padding: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+        }
+
+        #copyButton:hover {
+            background-color: #935bf5;
+        }
+
+        #copyButton svg {
+            fill: white;
+            width: 16px;
+            height: 16px;
+        }
+
+        .toggle-bar {
+            margin-top: 20px;
+            background-color: #1e1e2f;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .toggle-bar input {
+            margin-left: 15px;
+            pointer-events: none; /* Prevent clicking directly on the checkbox */
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .container {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Notification styling */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e1e2f;
+            color: #cfcfff;
+            border: 2px solid #7a3bff;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+            z-index: 100;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="banner">
+        <h2>
+            <ion-icon name="code-slash-outline" class="code-slash-icon"></ion-icon>
+             Made by Homo Erectus 
+            </h2>
+            <button class="info-button">
+                <ion-icon name="information-circle-outline" class="information-circle-icon"></ion-icon>
+                <div class="tooltip">This is my first project in html. Want to contact me? you can message @mrtallballs on discord.</div>
+            </button>
+    </div>
+
+    <div class="container">
+        <h1 class="main-title">Text Bypasser</h1>
+        <p class="message">Written to bypass automations.</p>
+
+        <textarea id="inputText" placeholder="What would you like to bypass? Type here..."></textarea>
+
+        <button onclick="convertText()">
+            <ion-icon name="sparkles-outline" class="sparkles-icon"></ion-icon>
+            Convert
+        </button>
+
+        <div id="outputBox">
+            <button id="copyButton" onclick="copyToClipboard()">
+                <ion-icon name="copy-outline" class="copy-icon"></ion-icon>
+            </button>
+        </div>
+
+        <div class="toggle-bar" onclick="toggleInvisibleCharacters()">
+            <span>
+                <ion-icon name="add-circle-outline" class="add-circle-icon"></ion-icon>
+                Extra Bypass (Adds Invisible Spaces)
+            </span>
+            <input type="checkbox" id="toggleInvisibleChar">
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        const charMap = {
+            'A': 'А', 'a': 'а', 'B': 'В', 'b': 'b', 'C': 'С', 'c': 'с', 'D': 'D', 'd': 'd',
+            'E': 'Е', 'e': 'е', 'F': 'F', 'f': 'f', 'G': 'G', 'g': 'g', 'H': 'Н', 'h': 'h',
+            'I': 'І', 'i': 'і', 'J': 'ј', 'j': 'ј', 'K': 'Κ', 'k': 'k', 'L': 'L', 'l': 'l',
+            'M': 'М', 'm': 'm', 'N': 'Ν', 'n': 'n', 'O': 'О', 'o': 'о', 'P': 'Р', 'p': 'р',
+            'Q': 'Q', 'q': 'q', 'R': 'R', 'r': 'r', 'S': 'Ѕ', 's': 'ѕ', 'T': 'Т', 't': 't',
+            'U': 'U', 'u': 'u', 'V': 'V', 'v': 'v', 'W': 'W', 'w': 'w', 'X': 'Х', 'x': 'х',
+            'Y': 'Υ', 'y': 'у', 'Z': 'Ζ', 'z': 'z'
+        };
+
+        let addInvisibleChar = false;
+
+        function convertText() {
+            const inputText = document.getElementById('inputText').value;
+            const outputBox = document.getElementById('outputBox');
+            const copyButton = document.getElementById('copyButton');
+            showNotification('Text Converted!');
+
+            let result = '';
+
+            for (let char of inputText) {
+                let convertedChar = charMap[char] || char; // Use mapped character or the original if no mapping exists
+                result += addInvisibleChar ? convertedChar + '\u2065' : convertedChar;
+            }
+
+            outputBox.textContent = result.trim();
+            outputBox.appendChild(copyButton); // Ensure the copy button stays visible inside the output box
+        }
+
+        function copyToClipboard() {
+            const outputBox = document.getElementById('outputBox');
+            const text = outputBox.textContent.trim();
+
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Bypassed Text Copied!');
+            }).catch(err => {
+                showNotification('Failed to copy text: ' + err);
+            });
+        }
+
+        function toggleInvisibleCharacters() {
+            const checkbox = document.getElementById('toggleInvisibleChar');
+            checkbox.checked = !checkbox.checked;
+            addInvisibleChar = checkbox.checked;
+            showNotification('Extra Bypass Toggled!');
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 1300);
+        }
+    </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
