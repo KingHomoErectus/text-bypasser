@@ -3,3 +3,6 @@ Have Fun!
 --
 # Check the Changelog to see new updates!
 https://kinghomoerectus.github.io/text-bypasser/
+
+
+Want to contact me? message @mrtallballs on discord!
