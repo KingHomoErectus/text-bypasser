@@ -2,7 +2,7 @@ My first HTML project, meant to be a simple bypasser for things like Automod on 
 Have Fun!
 --
 # Check the Changelog to see new updates!
-https://kinghomoerectus.github.io/text-bypasser/
+site: https://kinghomoerectus.github.io/text-bypasser/
 
 
 Want to contact me? message @mrtallballs on discord!
