@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bypasser - Homo Erectus</title>
+    <title>Bypass Limits.</title>
+    <link rel="icon" href="https://i.imgur.com/HHrM2aC.png" type="image/png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,6 +29,17 @@
             z-index: -1;
         }
 
+        .background2 {
+            position: absolute;
+            top: -130px;
+            right: -190px;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle at center, rgba(116, 57, 245, 0.3), transparent 50%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
         .banner {
             width: 100%;
             background-color: #2c2c3e;
@@ -36,7 +48,7 @@
             display: flex;
             align-items: center;
             position: fixed;
-            top: 0; 
+            top: 0;
             left: 0;
         }
 
@@ -56,6 +68,33 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;
+        }
+
+
+        #randomizeButton {
+            position: absolute;
+            top: 23px;
+            right: 2px;
+            background-color: #7a3bff;
+            border: none;
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #randomizeButton:hover {
+            background-color: #935bf5;
+        }
+
+        #randomizeButton svg {
+            fill: white;
+            width: 16px;
+            height: 16px;
         }
 
         .info-button {
@@ -79,6 +118,10 @@
 
         .info-button:hover .tooltip {
             display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
         }
 
         .tooltip {
@@ -219,7 +262,6 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Notification styling */
         .notification {
             position: fixed;
             bottom: 20px;
@@ -245,23 +287,29 @@
 </head>
 <body>
     <div class="background"></div>
+    <div class="background2"></div>
 
     <div class="banner">
         <h2>
             <ion-icon name="code-slash-outline" class="code-slash-icon"></ion-icon>
-             Made by Homo Erectus 
-            </h2>
-            <button class="info-button">
-                <ion-icon name="information-circle-outline" class="information-circle-icon"></ion-icon>
-                <div class="tooltip">This is my first project in html. Want to contact me? you can message @mrtallballs on discord.</div>
-            </button>
+             Made by Homo Erectus
+        </h2>
+        <button class="info-button">
+            <ion-icon name="information-circle-outline" class="information-circle-icon"></ion-icon>
+            <div class="tooltip">This is my first project in html. Want to contact me? you can message @mrtallballs on discord.</div>
+        </button>
     </div>
 
     <div class="container">
         <h1 class="main-title">Text Bypasser</h1>
         <p class="message">Written to bypass automations.</p>
 
-        <textarea id="inputText" placeholder="What would you like to bypass? Type here..."></textarea>
+        <div class="input-wrapper">
+            <textarea id="inputText" placeholder="What would you like to bypass? Type here..."></textarea>
+            <button id="randomizeButton" onclick="addRandomSentence()">
+                <ion-icon name="dice-outline"></ion-icon>
+            </button>
+        </div>
 
         <button onclick="convertText()">
             <ion-icon name="sparkles-outline" class="sparkles-icon"></ion-icon>
@@ -297,6 +345,96 @@
         };
 
         let addInvisibleChar = false;
+        const randomSentences = [
+            /* normal sentences */
+            "Hello, how are you?",
+            "This is a random sentence.",
+            "Lorem ipsum dolor sit amet.",
+            "This text bypasses automations.",
+            "Welcome to my project!",
+            "the wrist was badly strained.",
+            "the piglet chased the butterfly.",
+            "the boy was there when the sun rose.",
+            "the juice of lemons makes fine punch.",
+            "the boy was there when the sun rose.",
+            "she wiped the sweat off her brow.",
+            "kick the ball straight and follow through.",
+            "the ship was torn apart on the sharp reef.",
+            "the birch canoe slid on the smooth planks.",
+            "the source of the huge river is the clear spring.",
+            "note closely the size of the gas tank.",
+            "the salt breeze came across from the sea.",
+            "it snowed, rained, and hailed the same morning.",
+            "lift the square stone over the fence.",
+            "read verse out loud for pleasure.",
+            /* words */
+            "fuck",
+            "shit",
+            "bitch",
+            "fuckwad",
+            "asshole",
+            "dickweed",
+            "shithead",
+            "twat",
+            "piss",
+            "fucked",
+            "shittiest",
+            "bullshit",
+            "jackass",
+            "motherfucker",
+            "dumbfuck",
+            "poonany",
+            "cockmuncher",
+            "dicktickler",
+            "coochie",
+            "fuckwit",
+            "nigga",
+            "fag",
+            /* healthy snacks fr */
+            "cyanide pills",
+            "fentanyl",
+            "meth",
+            "methamphetamine",
+            "coke",
+            "cocaine",
+            "crystal",
+            "crystal meth",
+            "crystal methamphetamine",
+            "weed",
+            "marijuana",
+            "hemp",
+            "CBD",
+            "THC",
+            "heroin",
+            "cannabis",
+            "alcohol",
+            "ketamine",
+            "LSD",
+            "acid",
+            "molly",
+            "ecstasy",
+            "angel dust",
+            "steroids",
+            "K2",
+            "bath salts",
+            "tobacco",
+            "nicotine",
+            "nic",
+            "vaping",
+            "blunt",
+            "cigar",
+            "cigarette",
+            "roach",
+            /* homophobic */
+            "would you rather have a gay son or thot daughter",
+            "get a life you fag",
+            "there are 2 genders only you dumbfuck",
+            "drop a TSAR bomb in a crowd of gay people",
+            "what the fuck is a omni",
+            "ew! a fag!!!",
+            "woah faggot! chill down!",
+            "i'm not writing any more of these"
+        ];
 
         function convertText() {
             const inputText = document.getElementById('inputText').value;
@@ -307,7 +445,7 @@
             let result = '';
 
             for (let char of inputText) {
-                let convertedChar = charMap[char] || char; 
+                let convertedChar = charMap[char] || char;
                 result += addInvisibleChar ? convertedChar + '\u2065' : convertedChar;
             }
 
@@ -333,6 +471,12 @@
             showNotification('Extra Bypass Toggled!');
         }
 
+        function addRandomSentence() {
+            const inputText = document.getElementById('inputText');
+            const randomIndex = Math.floor(Math.random() * randomSentences.length);
+            inputText.value = randomSentences[randomIndex];
+        }
+
         function showNotification(message) {
             const notification = document.getElementById('notification');
             notification.textContent = message;
@@ -340,7 +484,7 @@
 
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 1300);
+            }, 1000);
         }
     </script>
 
