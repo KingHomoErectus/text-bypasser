@@ -1,3 +1,18 @@
+# v1.0.2 Update
+1/26/2025
+
+## 1. Added Welcome Screen
+
+## 2. Added Quiet Background Music
+
+## 3. Output Box Size Decreased by 10%
+
+## 4. uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+
+
+--
+
+
 # v1.0.1 Update
 
 

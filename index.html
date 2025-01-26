@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bypass Limits.</title>
     <link rel="icon" href="https://i.imgur.com/HHrM2aC.png" type="image/png">
+	<audio id="bootSound" src="https://cdn.discordapp.com/attachments/1034716205610713181/1333006531628630036/fade.mp3?ex=67975293&is=67960113&hm=2dcb16eeac560f2f2e63f7e247e486938fcc01b16a66d93453de7c07e98efcf8&"></audio>
+	<audio id="backgroundMusic" src="https://cdn.discordapp.com/attachments/1034716205610713181/1333043526304403516/chill_piano.mp3?ex=67977507&is=67962387&hm=5bc91637c4ae91abe21c483bb1efa1f71948c820bc60b1ba00bf25e2cb694a22&" loop></audio>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +19,55 @@
             justify-content: flex-start;
             height: 100vh;
             overflow: hidden;
+        }
+
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 3s ease-in-out;
+        }
+
+        .welcome-text {
+            font-size: 54px;
+            color: white;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+        }
+
+        .begin-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #7a3bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 2s forwards;
+        }
+
+        .begin-button:hover {
+            background-color: #935bf5;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
         .background {
@@ -69,7 +120,6 @@
             -webkit-text-fill-color: transparent;
             margin: 0;
         }
-
 
         #randomizeButton {
             position: absolute;
@@ -182,7 +232,7 @@
             border: 2px solid #7a3bff;
             border-radius: 3px;
             padding: 10px;
-            min-height: 100px;
+            min-height: 90px;
             position: relative;
             white-space: pre-wrap;
         }
@@ -286,6 +336,55 @@
     </style>
 </head>
 <body>
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-text" id="welcomeText">Welcome, User.</div>
+        <button class="begin-button" id="beginButton">[ENTER]</button>
+    </div>
+	
+	    <script>
+        function getDeviceName() {
+            const userAgent = navigator.userAgent;
+
+if (userAgent.includes("Windows")) return "Windows User";
+if (userAgent.includes("Mac")) return "Mac User";
+if (userAgent.includes("iPhone")) return "iPhone User";
+if (userAgent.includes("iPad")) return "iPad User";
+if (userAgent.includes("Android")) return "Android User";
+if (userAgent.includes("Linux")) return "Linux User";
+if (userAgent.includes("Chrome OS")) return "Chrome OS User";
+if (userAgent.includes("PlayStation")) return "PlayStation User";
+if (userAgent.includes("Xbox")) return "Xbox User";
+if (userAgent.includes("BlackBerry")) return "BlackBerry User";
+if (userAgent.includes("Kindle")) return "Kindle User";
+if (userAgent.includes("webOS")) return "webOS User";
+
+
+            return "User";
+        }
+
+        window.onload = function () {
+            const welcomeText = document.getElementById('welcomeText');
+            const beginButton = document.getElementById('beginButton');
+            const welcomeScreen = document.getElementById('welcomeScreen');
+			const bootSound = document.getElementById('bootSound');
+			const backgroundMusic = document.getElementById('backgroundMusic');
+
+            const deviceName = getDeviceName();
+            welcomeText.textContent = `Welcome, ${deviceName}.`;
+
+            beginButton.addEventListener('click', () => {
+			bootSound.play();
+                welcomeScreen.style.opacity = '0';
+                setTimeout(() => {
+                    welcomeScreen.style.display = 'none';
+					backgroundMusic.volume = 0.1;
+				    backgroundMusic.play();
+                }, 4100);
+            });
+        };
+    </script>
+
+
     <div class="background"></div>
     <div class="background2"></div>
 
@@ -334,6 +433,7 @@
     <div id="notification" class="notification"></div>
 
     <script>
+
         const charMap = {
             'A': 'А', 'a': 'а', 'B': 'В', 'b': 'b', 'C': 'С', 'c': 'с', 'D': 'D', 'd': 'd',
             'E': 'Е', 'e': 'е', 'F': 'F', 'f': 'f', 'G': 'G', 'g': 'g', 'H': 'Н', 'h': 'h',
@@ -489,6 +589,6 @@
     </script>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> 
 </body>
 </html>
